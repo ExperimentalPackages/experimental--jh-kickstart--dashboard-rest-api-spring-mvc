@@ -32,11 +32,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <hibernate.version>6.5.2.Final</hibernate.version>
+        <jackson.version>2.17.1</jackson.version>
         <javax-cache-api.version>1.1.1</javax-cache-api.version>
         <ehcache.version>3.10.8</ehcache.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <springdoc-webmvc.version>2.5.0</springdoc-webmvc.version>
         <git-commit-id-plugin.version>9.0.0</git-commit-id-plugin.version>
+        <archunit-junit5.version>1.3.0</archunit-junit5.version>
         <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
         <checkstyle.version>10.17.0</checkstyle.version>
         <nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
@@ -104,6 +106,13 @@
             <artifactId>hibernate-jcache</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate6 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate6</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
@@ -174,6 +183,36 @@
             <groupId>org.springframework.modulith</groupId>
             <artifactId>spring-modulith-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hppc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5-api</artifactId>
+            <version>${archunit-junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- Adding the engine dependency to the surefire-plugin unfortunately does not work in the current version. -->
+            <!-- https://www.archunit.org/userguide/html/000_Index.html#_junit_5 -->
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5-engine</artifactId>
+            <version>${archunit-junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
     </dependencies>
 
