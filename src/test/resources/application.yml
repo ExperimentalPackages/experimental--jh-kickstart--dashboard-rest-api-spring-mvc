@@ -1,0 +1,33 @@
+spring :
+  application :
+    name : kvmix-dashboard
+  devtools :
+    add-properties : false
+    restart :
+      enabled : false
+    livereload :
+      enabled : false
+  liquibase :
+    change-log : db/changelog.xml
+  datasource :
+    type : com.zaxxer.hikari.HikariDataSource
+    driver-class-name : ${DATASOURCE_DRIVER:org.h2.Driver}
+    url : ${DATASOURCE_URL:jdbc:h2:mem:mydatabase}
+    username : ${DATASOURCE_USERNAME:myuser}
+    password : ${DATASOURCE_PASSWORD:}
+    hikari :
+      pool-name : Hikari
+      auto-commit : false
+  jpa :
+    hibernate :
+      ddl-auto : none
+      naming :
+        physical-strategy : org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy : org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    open-in-view : true
+    properties :
+      hibernate.jdbc.time_zone : UTC
+      hibernate.cache.use_second_level_cache : false
+      hibernate.cache.use_query_cache : false
+      hibernate.generate_statistics : false
+    show-sql : false

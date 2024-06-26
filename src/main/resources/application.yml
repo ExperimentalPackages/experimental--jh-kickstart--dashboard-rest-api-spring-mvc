@@ -1,0 +1,104 @@
+git :
+  commit : '@git.commit.id.abbrev@'
+  build_time : '@git.build.time@'
+
+info :
+  app :
+    name : '@project.name@'
+    description : '@project.description@'
+    version : '@project.version@'
+    git_commit : ${git.commit}
+    build_time : ${git.build_time}
+
+spring :
+  application :
+    name : kvmix-dashboard
+  liquibase :
+    change-log : db/changelog.xml
+  datasource :
+    type : com.zaxxer.hikari.HikariDataSource
+    url : ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/mydatabase}
+    username : ${DATASOURCE_USERNAME:myuser}
+    password : ${DATASOURCE_PASSWORD:secret}
+    driver-class-name : ${DATASOURCE_DRIVER:org.postgresql.Driver}
+    hikari :
+      pool-name : Hikari
+      auto-commit : false
+  jpa :
+    hibernate :
+      ddl-auto : none
+      naming :
+        physical-strategy : org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy : org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    open-in-view : true
+    properties :
+      hibernate.jdbc.time_zone : UTC
+      hibernate.id.new_generator_mappings : true
+      hibernate.connection.provider_disables_autocommit : true
+      hibernate.cache.use_second_level_cache : true
+      hibernate.cache.use_query_cache : true
+      hibernate.generate_statistics : false
+      hibernate.jdbc.batch_size : 25
+      hibernate.order_inserts : true
+      hibernate.order_updates : true
+      hibernate.query.fail_on_pagination_over_collection_fetch : true
+      hibernate.query.in_clause_parameter_padding : true
+    show-sql : false
+  devtools :
+    add-properties : false
+    restart :
+      enabled : false
+    livereload :
+      enabled : false
+
+  jackson :
+    default-property-inclusion : NON_NULL
+  lifecycle :
+    timeout-per-shutdown-phase : ${TIMEOUT_PER_SHUTDOWN:20s}
+
+
+server :
+  port : ${SERVER_PORT:8080}
+  shutdown : graceful
+  forward-headers-strategy : framework
+  tomcat :
+    redirect-context-root : false
+
+management :
+  health :
+    livenessstate :
+      enabled : true
+    readinessstate :
+      enabled : true
+  info :
+    env :
+      enabled : true
+    java :
+      enabled : true
+    os :
+      enabled : true
+  server :
+    port : ${MANAGEMENT_SERVER_PORT:8080}
+    add-application-context-header : true
+
+  endpoints :
+    enabled-by-default : false
+    web :
+      exposure :
+        include : health, info, env, openapi, swagger-ui
+  endpoint :
+    health :
+      enabled : true
+      show-details : always
+      probes :
+        enabled : true
+    info :
+      enabled : true
+    env :
+      enabled : true
+      show-values : always
+    prometheus :
+      enabled : true
+
+springdoc :
+  show-actuator : false
