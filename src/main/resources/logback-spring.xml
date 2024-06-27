@@ -40,7 +40,7 @@
     <logger name="sun.rmi.transport" level="WARN"/>
     <logger name="Validator" level="INFO"/>
     <logger name="_org.springframework.web.servlet.HandlerMapping.Mappings" level="INFO"/>
-    <logger name="liquibase" level="WARN"/>
+    <logger name="liquibase" level="INFO"/>
     <logger name="LiquibaseSchemaResolver" level="INFO"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
