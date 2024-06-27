@@ -4,7 +4,7 @@ services :
     container_name : kvmix-postgres
     restart : unless-stopped
     # volumes:
-    #   - ~/volumes/kvmix-ecommerce/postgresql/:/var/lib/postgresql/data/
+    #   - ~/volumes/kvmix-dashboard /postgresql/:/var/lib/postgresql/data/
     environment :
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=secret
@@ -19,12 +19,6 @@ services :
     # remove the "127.0.0.1:" prefix
     ports :
       - 127.0.0.1:5432:5432
-
-  zipkin :
-    image : 'openzipkin/zipkin:latest'
-    container_name : kvmix-zipkin
-    ports :
-      - '9411'
 
   mailhog :
     image : mailhog/mailhog

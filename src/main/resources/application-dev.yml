@@ -23,15 +23,15 @@ spring :
       enabled : true
       additional-exclude : static/**
     livereload :
-      enabled : false # we use Webpack dev server + BrowserSync for livereload
+      enabled : false
   jackson :
     serialization :
       indent-output : true
   datasource :
     type : com.zaxxer.hikari.HikariDataSource
-    url : jdbc:postgresql://localhost:5432/Dashboard
-    username : Dashboard
-    password :
+    url : jdbc:postgresql://localhost:5432/mydatabase
+    username : myuser
+    password : secret
     hikari :
       poolName : Hikari
       auto-commit : false
