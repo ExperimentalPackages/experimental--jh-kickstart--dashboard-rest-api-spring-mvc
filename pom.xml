@@ -47,9 +47,10 @@
         <maven-surefire-plugin.version>3.3.0</maven-surefire-plugin.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
         <spring-modulith.version>1.2.1</spring-modulith.version>
+        <cucumber-bom.version>7.18.0</cucumber-bom.version>
         <testng.version>7.10.2</testng.version>
         <spring-boot.run.jvmArguments>-Duser.timezone=UTC</spring-boot.run.jvmArguments>
-        <start-class>com.kvmix.dashboard.DashboardApplicationlication</start-class>
+        <start-class>com.kvmix.dashboard.DashboardApplication</start-class>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -57,6 +58,13 @@
                 <groupId>org.springframework.modulith</groupId>
                 <artifactId>spring-modulith-bom</artifactId>
                 <version>${spring-modulith.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-bom</artifactId>
+                <version>${cucumber-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -271,12 +279,33 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <!-- Adding the engine dependency to the surefire-plugin unfortunately does not work in the current version. -->
-            <!-- https://www.archunit.org/userguide/html/000_Index.html#_junit_5 -->
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit5-engine</artifactId>
             <version>${archunit-junit5.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus-simpleclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -397,6 +426,32 @@
                             <includeOnlyProperty>^git.build.time$</includeOnlyProperty>
                         </includeOnlyProperties>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <!--Work around. Surefire does not use JUnit's Test Engine discovery functionality -->
+                            <id>prepare cucumber feature files</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <target>
+                                    <echo message="Running JUnit Platform CLI"/>
+                                    <java classname="org.junit.platform.console.ConsoleLauncher" fork="true" failonerror="true" newenvironment="true" maxmemory="512m" classpathref="maven.test.classpath">
+                                        <jvmarg value="-Dspring.profiles.active=testprod"/>
+                                        <arg value="--include-engine"/>
+                                        <arg value="cucumber"/>
+                                        <arg value="--scan-classpath"/>
+                                        <arg value="${project.build.testOutputDirectory}"/>
+                                    </java>
+                                </target>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
