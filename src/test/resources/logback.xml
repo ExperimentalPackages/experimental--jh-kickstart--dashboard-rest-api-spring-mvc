@@ -6,7 +6,7 @@
 
     <logger name="com.kvmix.dashboard" level="INFO"/>
 
-    <logger name="tech.jhipster" level="WARN"/>
+    <logger name="com.kvmix.dashboard" level="WARN"/>
 
     <!-- https://www.testcontainers.org/supported_docker_environment/logging_config/ -->
     <logger name="org.testcontainers" level="INFO"/>
@@ -43,6 +43,6 @@
     <logger name="org.hibernate.orm.incubating" level="ERROR"/>
     <logger name="liquibase" level="WARN"/>
     <logger name="LiquibaseSchemaResolver" level="INFO"/>
-    <!-- jhipster-needle-logback-add-log - JHipster will add a new log with level -->
+    <!-- kvmix-needle-logback-add-log - KVMix will add a new log with level -->
 
 </configuration>

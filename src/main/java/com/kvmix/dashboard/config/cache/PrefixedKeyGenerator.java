@@ -12,16 +12,16 @@ import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.interceptor.KeyGenerator;
 
 /**
- * <p>PrefixedKeyGenerator class.</p>
+ * PrefixedKeyGenerator class.
  *
- * <p>This class is responsible for generating cache keys that are specific to a version of the application
- * by prefixing them with git commit hash.</p>
+ * This class is responsible for generating cache keys that are specific to a version of the application
+ * by prefixing them with git commit hash.
  *
- * <p>This allows multiple versions of an application to "share" the same distributed cache even when the structure
- * of the values has changed between those versions of the software.</p>
+ * This allows multiple versions of an application to "share" the same distributed cache even when the structure
+ * of the values has changed between those versions of the software.
  *
- * <p>This case typically occurs in production to ensure zero-downtime updates across a cluster
- * requiring that two different versions of the application have to run concurrently for some time.</p>
+ * This case typically occurs in production to ensure zero-downtime updates across a cluster
+ * requiring that two different versions of the application have to run concurrently for some time.
  */
 public class PrefixedKeyGenerator implements KeyGenerator {
 
@@ -31,7 +31,7 @@ public class PrefixedKeyGenerator implements KeyGenerator {
   private String version = null;
 
   /**
-   * <p>Constructor for PrefixedKeyGenerator.</p>
+   * Constructor for PrefixedKeyGenerator.
    *
    * @param gitProperties   a {@link org.springframework.boot.info.GitProperties} object.
    * @param buildProperties a {@link org.springframework.boot.info.BuildProperties} object.

@@ -29,10 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for verifying the behavior of Hibernate in the context of storing various date and time types across different databases.
  * The tests focus on ensuring that the stored values are correctly transformed and stored according to the configured timezone.
  * Timezone is environment specific, and can be adjusted according to your needs.
- *
- * <p>For more context, refer to:
- * - GitHub Issue: https://github.com/kvmix.generator-kvmix.issues/22579
- * - Pull Request: https://github.com/kvmix.generator-kvmix.pull/22946
  */
 @IntegrationTest
 class HibernateTimeZoneIT {
@@ -145,7 +141,7 @@ class HibernateTimeZoneIT {
         // Convert to configured timezone
         .withOffsetSameInstant(ZoneId.of(zoneId).getRules().getOffset(Instant.now()))
         // Normalize to System TimeZone.
-        // TODO this behavior looks a bug, refer to https://github.com/kvmix.generator-kvmix.issues/22579.
+        // TODO this behavior looks a bug, refer to https://github.com/kvmix/generator-kvmix/issues/22579.
         .withOffsetSameLocal(OffsetDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault()).getOffset())
         // Convert the normalized value to configured timezone
         .withOffsetSameInstant(ZoneId.of(zoneId).getRules().getOffset(Instant.EPOCH))
@@ -167,7 +163,7 @@ class HibernateTimeZoneIT {
   }
 
   private String generateSqlRequest(String fieldName, long id) {
-    return format("SELECT %s FROM jhi_date_time_wrapper where id=%d", fieldName, id);
+    return format("SELECT %s FROM kvmix_date_time_wrapper where id=%d", fieldName, id);
   }
 
   private void assertThatValueFromSqlRowSetIsEqualToExpectedValue(SqlRowSet sqlRowSet, String expectedValue) {

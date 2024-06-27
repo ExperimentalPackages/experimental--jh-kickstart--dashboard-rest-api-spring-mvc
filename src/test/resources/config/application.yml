@@ -1,0 +1,85 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration is used for unit/integration tests.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+spring :
+  application :
+    name : kvmix-dashboard
+  # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
+  liquibase :
+    contexts : test
+    change-log : config/liquibase/master.xml
+  jackson :
+    serialization :
+      write-durations-as-timestamps : false
+  mail :
+    host : localhost
+    port : 1025
+  main :
+    allow-bean-definition-overriding : true
+  messages :
+    basename : i18n/messages
+  security :
+    oauth2 :
+      resourceserver :
+        jwt :
+          authority-prefix : ''
+          authorities-claim-name : auth
+  task :
+    execution :
+      thread-name-prefix : dashboard-task-
+      pool :
+        core-size : 1
+        max-size : 50
+        queue-capacity : 10000
+    scheduling :
+      thread-name-prefix : dashboard-scheduling-
+      pool :
+        size : 20
+  thymeleaf :
+    mode : HTML
+
+server :
+  port : 10344
+  address : localhost
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the ApplicationProperties above
+# ===================================================================
+kvmix :
+  clientApp :
+    name : 'dashboardApp'
+  mail :
+    from : Dashboard@localhost.com
+    base-url : http://127.0.0.1:8080
+  logging :
+    # To test json console appender
+    use-json-format : false
+    logstash :
+      enabled : false
+      host : localhost
+      port : 5000
+      ring-buffer-size : 512
+  security :
+    authentication :
+      jwt :
+        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+        base64-secret : MjVkMjY4N2UwMWZhOTZlN2M5ZmEzNTE5YzdkNmJiMDJhNDU0OTU2YTUyYjA2OTE5Zjc5ZDZlNGRkMDI3OWRlNjhjYzgxMTJkZGI1MWI5Y2E0NGFmNDI3MjlkMzNhODU1OGU0YWY1OTkwMGJiOWI4YWE4ZDFlMTA2ODNhM2EyMjI=
+        # Token is valid 24 hours
+        token-validity-in-seconds : 86400
+        token-validity-in-seconds-for-remember-me : 86400
+
+management :
+  health :
+    mail :
+      enabled : false

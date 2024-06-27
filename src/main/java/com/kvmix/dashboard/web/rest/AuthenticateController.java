@@ -42,11 +42,14 @@ public class AuthenticateController {
   private final Logger log = LoggerFactory.getLogger(AuthenticateController.class);
 
   private final JwtEncoder jwtEncoder;
-  private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
   @Value("${kvmix.security.authentication.jwt.token-validity-in-seconds:0}")
   private long tokenValidityInSeconds;
+
   @Value("${kvmix.security.authentication.jwt.token-validity-in-seconds-for-remember-me:0}")
   private long tokenValidityInSecondsForRememberMe;
+
+  private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
   public AuthenticateController(JwtEncoder jwtEncoder, AuthenticationManagerBuilder authenticationManagerBuilder) {
     this.jwtEncoder = jwtEncoder;

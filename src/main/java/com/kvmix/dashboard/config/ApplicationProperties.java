@@ -7,7 +7,7 @@ import org.springframework.web.cors.CorsConfiguration;
 /**
  * Properties specific to Dashboard.
  *
- * <p>Properties are configured in the {@code application.yml} file.</p>
+ * Properties are configured in the {@code application.yml} file.
  */
 @ConfigurationProperties(prefix = "kvmix", ignoreUnknownFields = true)
 @Setter

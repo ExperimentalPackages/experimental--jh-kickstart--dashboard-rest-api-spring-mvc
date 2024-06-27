@@ -19,7 +19,7 @@ public final class HeaderUtil {
   }
 
   /**
-   * <p>createAlert.</p>
+   * createAlert.
    *
    * @param applicationName a {@link java.lang.String} object.
    * @param message         a {@link java.lang.String} object.
@@ -38,7 +38,7 @@ public final class HeaderUtil {
   }
 
   /**
-   * <p>createEntityCreationAlert.</p>
+   * createEntityCreationAlert.
    *
    * @param applicationName   a {@link java.lang.String} object.
    * @param enableTranslation a boolean.
@@ -59,7 +59,7 @@ public final class HeaderUtil {
   }
 
   /**
-   * <p>createEntityUpdateAlert.</p>
+   * createEntityUpdateAlert.
    *
    * @param applicationName   a {@link java.lang.String} object.
    * @param enableTranslation a boolean.
@@ -75,7 +75,7 @@ public final class HeaderUtil {
   }
 
   /**
-   * <p>createEntityDeletionAlert.</p>
+   * createEntityDeletionAlert.
    *
    * @param applicationName   a {@link java.lang.String} object.
    * @param enableTranslation a boolean.
@@ -96,7 +96,7 @@ public final class HeaderUtil {
   }
 
   /**
-   * <p>createFailureAlert.</p>
+   * createFailureAlert.
    *
    * @param applicationName   a {@link java.lang.String} object.
    * @param enableTranslation a boolean.

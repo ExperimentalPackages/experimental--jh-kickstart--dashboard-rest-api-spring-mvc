@@ -22,7 +22,7 @@ public final class RandomUtil {
   }
 
   /**
-   * <p>generateRandomAlphanumericString.</p>
+   * generateRandomAlphanumericString.
    *
    * @return a {@link java.lang.String} object.
    */

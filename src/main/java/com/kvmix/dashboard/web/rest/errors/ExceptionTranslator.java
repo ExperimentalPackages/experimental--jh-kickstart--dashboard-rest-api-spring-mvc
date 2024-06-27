@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.kvmix.dashboard.config.Constants;
+import com.kvmix.dashboard.web.rest.errors.ProblemDetailWithCause.ProblemDetailWithCauseBuilder;
 import com.kvmix.dashboard.web.util.HeaderUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,9 +47,11 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
   private static final String MESSAGE_KEY = "message";
   private static final String PATH_KEY = "path";
   private static final boolean CASUAL_CHAIN_ENABLED = false;
-  private final Environment env;
+
   @Value("${kvmix.clientApp.name}")
   private String applicationName;
+
+  private final Environment env;
 
   public ExceptionTranslator(Environment env) {
     this.env = env;
@@ -99,7 +102,7 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
     ) {
       return problemDetailWithCause;
     }
-    return ProblemDetailWithCause.ProblemDetailWithCauseBuilder.instance().withStatus(toStatus(ex).value()).build();
+    return ProblemDetailWithCauseBuilder.instance().withStatus(toStatus(ex).value()).build();
   }
 
   protected ProblemDetailWithCause customizeProblem(ProblemDetailWithCause problem, Throwable err, NativeWebRequest request) {
@@ -135,7 +138,10 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
       problem.setProperty(PATH_KEY, getPathValue(request));
     }
 
-    if ((err instanceof MethodArgumentNotValidException fieldException) && (problemProperties == null || !problemProperties.containsKey(FIELD_ERRORS_KEY))) {
+    if (
+        (err instanceof MethodArgumentNotValidException fieldException) &&
+        (problemProperties == null || !problemProperties.containsKey(FIELD_ERRORS_KEY))
+    ) {
       problem.setProperty(FIELD_ERRORS_KEY, getFieldErrors(fieldException));
     }
 

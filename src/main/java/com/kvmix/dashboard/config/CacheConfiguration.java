@@ -26,8 +26,8 @@ public class CacheConfiguration {
   private BuildProperties buildProperties;
   private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
-  public CacheConfiguration(ApplicationProperties applicationProperties) {
-    ApplicationProperties.Cache.Ehcache ehcache = applicationProperties.getCache().getEhcache();
+  public CacheConfiguration(ApplicationProperties ApplicationProperties) {
+    ApplicationProperties.Cache.Ehcache ehcache = ApplicationProperties.getCache().getEhcache();
 
     jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
         CacheConfigurationBuilder.newCacheConfigurationBuilder(
@@ -53,7 +53,6 @@ public class CacheConfiguration {
       createCache(cm, com.kvmix.dashboard.domain.User.class.getName());
       createCache(cm, com.kvmix.dashboard.domain.Authority.class.getName());
       createCache(cm, com.kvmix.dashboard.domain.User.class.getName() + ".authorities");
-      // kvmix.needle-ehcache-add-entry
     };
   }
 

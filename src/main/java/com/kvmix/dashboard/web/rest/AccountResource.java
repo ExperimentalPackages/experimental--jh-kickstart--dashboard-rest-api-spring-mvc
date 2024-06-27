@@ -12,6 +12,7 @@ import com.kvmix.dashboard.service.dto.AdminUserDTO;
 import com.kvmix.dashboard.service.dto.PasswordChangeDTO;
 import com.kvmix.dashboard.web.rest.errors.EmailAlreadyUsedException;
 import com.kvmix.dashboard.web.rest.errors.InvalidPasswordException;
+import com.kvmix.dashboard.web.rest.errors.LoginAlreadyUsedException;
 import com.kvmix.dashboard.web.rest.vm.KeyAndPasswordVM;
 import com.kvmix.dashboard.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.StringUtils;
@@ -33,21 +34,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class AccountResource {
 
+  private static class AccountResourceException extends RuntimeException {
+
+    private AccountResourceException(String message) {
+      super(message);
+    }
+  }
+
   private final Logger log = LoggerFactory.getLogger(AccountResource.class);
+
   private final UserRepository userRepository;
+
   private final UserService userService;
+
   private final MailService mailService;
 
   public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
     this.userRepository = userRepository;
     this.userService = userService;
     this.mailService = mailService;
-  }
-
-  private static boolean isPasswordLengthInvalid(String password) {
-    return (StringUtils.isEmpty(password)
-        || password.length() < ManagedUserVM.PASSWORD_MIN_LENGTH
-        || password.length() > ManagedUserVM.PASSWORD_MAX_LENGTH);
   }
 
   /**
@@ -174,10 +179,11 @@ public class AccountResource {
     }
   }
 
-  private static class AccountResourceException extends RuntimeException {
-
-    private AccountResourceException(String message) {
-      super(message);
-    }
+  private static boolean isPasswordLengthInvalid(String password) {
+    return (
+        StringUtils.isEmpty(password) ||
+        password.length() < ManagedUserVM.PASSWORD_MIN_LENGTH ||
+        password.length() > ManagedUserVM.PASSWORD_MAX_LENGTH
+    );
   }
 }

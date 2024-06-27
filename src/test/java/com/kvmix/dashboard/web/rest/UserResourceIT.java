@@ -10,8 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.kvmix.dashboard.DashboardApplication;
-
 import jakarta.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +30,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.http.MediaType;
@@ -46,7 +43,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser(authorities = AuthoritiesConstants.ADMIN)
 @IntegrationTest
-@SpringBootTest(classes = DashboardApplication.class)
 class UserResourceIT {
 
   private static final String DEFAULT_LOGIN = "johndoe";
@@ -58,13 +54,13 @@ class UserResourceIT {
   private static final String UPDATED_PASSWORD = "passkvmix";
 
   private static final String DEFAULT_EMAIL = "johndoe@localhost";
-  private static final String UPDATED_EMAIL = "kvmix.localhost";
+  private static final String UPDATED_EMAIL = "kvmix@localhost";
 
   private static final String DEFAULT_FIRSTNAME = "john";
-  private static final String UPDATED_FIRSTNAME = "kvmix.irstName";
+  private static final String UPDATED_FIRSTNAME = "kvmixFirstName";
 
   private static final String DEFAULT_LASTNAME = "doe";
-  private static final String UPDATED_LASTNAME = "kvmix.astName";
+  private static final String UPDATED_LASTNAME = "kvmixLastName";
 
   private static final String DEFAULT_IMAGEURL = "http://placehold.it/50x50";
   private static final String UPDATED_IMAGEURL = "http://placehold.it/40x40";
@@ -104,8 +100,8 @@ class UserResourceIT {
 
   /**
    * Create a User.
-   *
-   * <p>This is a static method, as tests for other entities might also need it,
+   * 
+   * This is a static method, as tests for other entities might also need it,
    * if they test an entity which has a required relationship to the User entity.
    */
   public static User createEntity(EntityManager em) {
@@ -404,7 +400,7 @@ class UserResourceIT {
     anotherUser.setLogin("kvmix");
     anotherUser.setPassword(RandomStringUtils.randomAlphanumeric(60));
     anotherUser.setActivated(true);
-    anotherUser.setEmail("kvmix.localhost");
+    anotherUser.setEmail("kvmix@localhost");
     anotherUser.setFirstName("java");
     anotherUser.setLastName("hipster");
     anotherUser.setImageUrl("");
@@ -419,7 +415,7 @@ class UserResourceIT {
     userDTO.setLogin(updatedUser.getLogin());
     userDTO.setFirstName(updatedUser.getFirstName());
     userDTO.setLastName(updatedUser.getLastName());
-    userDTO.setEmail("kvmix.localhost"); // this email should already be used by anotherUser
+    userDTO.setEmail("kvmix@localhost"); // this email should already be used by anotherUser
     userDTO.setActivated(updatedUser.isActivated());
     userDTO.setImageUrl(updatedUser.getImageUrl());
     userDTO.setLangKey(updatedUser.getLangKey());
@@ -444,7 +440,7 @@ class UserResourceIT {
     anotherUser.setLogin("kvmix");
     anotherUser.setPassword(RandomStringUtils.randomAlphanumeric(60));
     anotherUser.setActivated(true);
-    anotherUser.setEmail("kvmix.localhost");
+    anotherUser.setEmail("kvmix@localhost");
     anotherUser.setFirstName("java");
     anotherUser.setLastName("hipster");
     anotherUser.setImageUrl("");

@@ -21,7 +21,7 @@ import org.springframework.data.domain.Persistable;
  * A Authority.
  */
 @Entity
-@Table(name = "jhi_authority")
+@Table(name = "kvmix_authority")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @JsonIgnoreProperties(value = {"new", "id"})
 @SuppressWarnings("common-java:DuplicatedBlocks")
@@ -38,19 +38,18 @@ public class Authority implements Serializable, Persistable<String> {
   @Transient
   private boolean isPersisted;
 
-  // kvmix.needle-entity-add-field - JHipster will add fields here
 
   public String getName() {
     return this.name;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public Authority name(String name) {
     this.setName(name);
     return this;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   @PostLoad
@@ -74,8 +73,6 @@ public class Authority implements Serializable, Persistable<String> {
     this.isPersisted = true;
     return this;
   }
-
-  // kvmix.needle-entity-add-getters-setters - JHipster will add getters and setters here
 
   @Override
   public boolean equals(Object o) {

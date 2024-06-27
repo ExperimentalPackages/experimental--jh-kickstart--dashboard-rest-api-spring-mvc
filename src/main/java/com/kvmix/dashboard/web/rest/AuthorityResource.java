@@ -33,11 +33,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Transactional
 public class AuthorityResource {
 
-  private static final String ENTITY_NAME = "adminAuthority";
   private final Logger log = LoggerFactory.getLogger(AuthorityResource.class);
-  private final AuthorityRepository authorityRepository;
+
+  private static final String ENTITY_NAME = "adminAuthority";
+
   @Value("${kvmix.clientApp.name}")
   private String applicationName;
+
+  private final AuthorityRepository authorityRepository;
 
   public AuthorityResource(AuthorityRepository authorityRepository) {
     this.authorityRepository = authorityRepository;

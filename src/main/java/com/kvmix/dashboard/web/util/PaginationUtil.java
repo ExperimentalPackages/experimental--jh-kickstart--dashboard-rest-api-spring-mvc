@@ -7,7 +7,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * Utility class for handling pagination.
  *
- * <p>Pagination uses the same principles as the <a href="https://docs.github.com/rest/guides/using-pagination-in-the-rest-api">GitHub API</a>,
+ * Pagination uses the same principles as the <a href="https://docs.github.com/rest/guides/using-pagination-in-the-rest-api">GitHub API</a>,
  * and follow <a href="http://tools.ietf.org/html/rfc5988">RFC 5988 (Link header)</a>.
  */
 public final class PaginationUtil {

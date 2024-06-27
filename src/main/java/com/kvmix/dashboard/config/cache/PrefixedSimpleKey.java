@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 /**
- * <p>PrefixedSimpleKey class.</p>
+ * PrefixedSimpleKey class.
  */
 public class PrefixedSimpleKey implements Serializable {
 
@@ -17,7 +17,7 @@ public class PrefixedSimpleKey implements Serializable {
   private int hashCodeValue;
 
   /**
-   * <p>Constructor for PrefixedSimpleKey.</p>
+   * Constructor for PrefixedSimpleKey.
    *
    * @param prefix     a {@link java.lang.String} object.
    * @param methodName a {@link java.lang.String} object.
@@ -39,10 +39,10 @@ public class PrefixedSimpleKey implements Serializable {
   @Override
   public boolean equals(Object other) {
     return (this == other
-         ||  (other instanceof PrefixedSimpleKey
-         && prefix.equals(((PrefixedSimpleKey) other).prefix)
-         && methodName.equals(((PrefixedSimpleKey) other).methodName)
-         && Arrays.deepEquals(params, ((PrefixedSimpleKey) other).params)));
+            || (other instanceof PrefixedSimpleKey
+                && prefix.equals(((PrefixedSimpleKey) other).prefix)
+                && methodName.equals(((PrefixedSimpleKey) other).methodName)
+                && Arrays.deepEquals(params, ((PrefixedSimpleKey) other).params)));
   }
 
   @Override

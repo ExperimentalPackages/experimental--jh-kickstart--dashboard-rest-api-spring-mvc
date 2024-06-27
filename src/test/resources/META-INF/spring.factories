@@ -1,2 +1,2 @@
-org.springframework.test.context.ContextCustomizerFactory = com.kvmix.dashboard.\
+org.springframework.test.context.ContextCustomizerFactory=com.kvmix.dashboard.\
     config.SqlTestContainersSpringContextCustomizerFactory
