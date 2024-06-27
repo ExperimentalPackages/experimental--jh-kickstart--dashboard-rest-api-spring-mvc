@@ -24,6 +24,7 @@ import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import com.kvmix.dashboard.IntegrationTest;
 import com.kvmix.dashboard.config.ApplicationProperties;
@@ -36,7 +37,6 @@ import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mail.MailSendException;
-import org.springframework.mail.javamail.JavaMailSender;
 
 /**
  * Integration tests for {@link MailService}.
@@ -54,7 +54,7 @@ class MailServiceIT {
   private static final Pattern PATTERN_LOCALE_2 = Pattern.compile("([a-z]{2})-([a-z]{2})");
 
   @Autowired
-  private ApplicationProperties ApplicationProperties;
+  private ApplicationProperties applicationProperties;
 
   @MockBean
   private JavaMailSender javaMailSender;
@@ -78,7 +78,7 @@ class MailServiceIT {
     MimeMessage message = messageCaptor.getValue();
     assertThat(message.getSubject()).isEqualTo("testSubject");
     assertThat(message.getAllRecipients()[0]).hasToString("john.doe@example.com");
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent()).isInstanceOf(String.class);
     assertThat(message.getContent()).hasToString("testContent");
     assertThat(message.getDataHandler().getContentType()).isEqualTo("text/plain; charset=UTF-8");
@@ -91,7 +91,7 @@ class MailServiceIT {
     MimeMessage message = messageCaptor.getValue();
     assertThat(message.getSubject()).isEqualTo("testSubject");
     assertThat(message.getAllRecipients()[0]).hasToString("john.doe@example.com");
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent()).isInstanceOf(String.class);
     assertThat(message.getContent()).hasToString("testContent");
     assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
@@ -108,7 +108,7 @@ class MailServiceIT {
     part.writeTo(aos);
     assertThat(message.getSubject()).isEqualTo("testSubject");
     assertThat(message.getAllRecipients()[0]).hasToString("john.doe@example.com");
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent()).isInstanceOf(Multipart.class);
     assertThat(aos).hasToString("\r\ntestContent");
     assertThat(part.getDataHandler().getContentType()).isEqualTo("text/plain; charset=UTF-8");
@@ -125,7 +125,7 @@ class MailServiceIT {
     part.writeTo(aos);
     assertThat(message.getSubject()).isEqualTo("testSubject");
     assertThat(message.getAllRecipients()[0]).hasToString("john.doe@example.com");
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent()).isInstanceOf(Multipart.class);
     assertThat(aos).hasToString("\r\ntestContent");
     assertThat(part.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
@@ -142,7 +142,7 @@ class MailServiceIT {
     MimeMessage message = messageCaptor.getValue();
     assertThat(message.getSubject()).isEqualTo("test title");
     assertThat(message.getAllRecipients()[0]).hasToString(user.getEmail());
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent().toString()).isEqualToNormalizingNewlines("<html>test title, http://127.0.0.1:8080, john</html>\n");
     assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
   }
@@ -157,7 +157,7 @@ class MailServiceIT {
     verify(javaMailSender).send(messageCaptor.capture());
     MimeMessage message = messageCaptor.getValue();
     assertThat(message.getAllRecipients()[0]).hasToString(user.getEmail());
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent().toString()).isNotEmpty();
     assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
   }
@@ -172,7 +172,7 @@ class MailServiceIT {
     verify(javaMailSender).send(messageCaptor.capture());
     MimeMessage message = messageCaptor.getValue();
     assertThat(message.getAllRecipients()[0]).hasToString(user.getEmail());
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent().toString()).isNotEmpty();
     assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
   }
@@ -187,7 +187,7 @@ class MailServiceIT {
     verify(javaMailSender).send(messageCaptor.capture());
     MimeMessage message = messageCaptor.getValue();
     assertThat(message.getAllRecipients()[0]).hasToString(user.getEmail());
-    assertThat(message.getFrom()[0]).hasToString(ApplicationProperties.getMail().getFrom());
+    assertThat(message.getFrom()[0]).hasToString(applicationProperties.getMail().getFrom());
     assertThat(message.getContent().toString()).isNotEmpty();
     assertThat(message.getDataHandler().getContentType()).isEqualTo("text/html;charset=UTF-8");
   }

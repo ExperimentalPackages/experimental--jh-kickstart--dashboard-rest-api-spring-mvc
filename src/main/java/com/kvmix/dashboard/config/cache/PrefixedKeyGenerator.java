@@ -14,13 +14,13 @@ import org.springframework.cache.interceptor.KeyGenerator;
 /**
  * PrefixedKeyGenerator class.
  *
- * This class is responsible for generating cache keys that are specific to a version of the application
+ * <p>This class is responsible for generating cache keys that are specific to a version of the application
  * by prefixing them with git commit hash.
  *
- * This allows multiple versions of an application to "share" the same distributed cache even when the structure
+ * <p>This allows multiple versions of an application to "share" the same distributed cache even when the structure
  * of the values has changed between those versions of the software.
  *
- * This case typically occurs in production to ensure zero-downtime updates across a cluster
+ * <p>This case typically occurs in production to ensure zero-downtime updates across a cluster
  * requiring that two different versions of the application have to run concurrently for some time.
  */
 public class PrefixedKeyGenerator implements KeyGenerator {

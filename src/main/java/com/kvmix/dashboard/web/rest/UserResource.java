@@ -44,14 +44,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
  * REST controller for managing users.
- * 
- * This class accesses the {@link com.kvmix.dashboard.domain.User} entity, and needs to fetch its collection of authorities.
- * 
- * For a normal use-case, it would be better to have an eager relationship between User and Authority,
+ *
+ * <p>This class accesses the {@link com.kvmix.dashboard.domain.User} entity, and needs to fetch its collection of authorities.
+ *
+ * <p>For a normal use-case, it would be better to have an eager relationship between User and Authority,
  * and send everything to the client side: there would be no View Model and DTO, a lot less code, and an outer-join
  * which would be good for performance.
- * 
- * We use a View Model and a DTO for 3 reasons:
+ *
+ * <p>We use a View Model and a DTO for 3 reasons:
  * <ul>
  * <li>We want to keep a lazy association between the user and the authorities, because people will
  * quite often do relationships with the user, and we don't want them to get the authorities all
@@ -64,7 +64,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  * <li> As this manages users, for security reasons, we'd rather have a DTO layer.</li>
  * </ul>
  * 
- * Another option would be to have a specific JPA entity graph to handle this case.
+ * <p>Another option would be to have a specific JPA entity graph to handle this case.
  */
 @RestController
 @RequestMapping("/api/admin")
@@ -105,8 +105,8 @@ public class UserResource {
 
   /**
    * {@code POST  /admin/users}  : Creates a new user.
-   * 
-   * Creates a new user if the login and email are not already used, and sends an
+   *
+   * <p>Creates a new user if the login and email are not already used, and sends an
    * mail with an activation link.
    * The user needs to be activated on creation.
    *

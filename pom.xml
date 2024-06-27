@@ -50,7 +50,6 @@
         <testng.version>7.10.2</testng.version>
         <spring-boot.run.jvmArguments>-Duser.timezone=UTC</spring-boot.run.jvmArguments>
         <start-class>com.kvmix.dashboard.DashboardApplicationlication</start-class>
-        <checkstyle.skip>true</checkstyle.skip>
     </properties>
     <dependencyManagement>
         <dependencies>

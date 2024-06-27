@@ -26,8 +26,8 @@ public class CacheConfiguration {
   private BuildProperties buildProperties;
   private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
-  public CacheConfiguration(ApplicationProperties ApplicationProperties) {
-    ApplicationProperties.Cache.Ehcache ehcache = ApplicationProperties.getCache().getEhcache();
+  public CacheConfiguration(ApplicationProperties applicationProperties) {
+    ApplicationProperties.Cache.Ehcache ehcache = applicationProperties.getCache().getEhcache();
 
     jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
         CacheConfigurationBuilder.newCacheConfigurationBuilder(

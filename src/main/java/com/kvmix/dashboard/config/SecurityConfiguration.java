@@ -21,10 +21,10 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
-  private final ApplicationProperties ApplicationProperties;
+  private final ApplicationProperties applicationProperties;
 
-  public SecurityConfiguration(ApplicationProperties ApplicationProperties) {
-    this.ApplicationProperties = ApplicationProperties;
+  public SecurityConfiguration(ApplicationProperties applicationProperties) {
+    this.applicationProperties = applicationProperties;
   }
 
   @Bean

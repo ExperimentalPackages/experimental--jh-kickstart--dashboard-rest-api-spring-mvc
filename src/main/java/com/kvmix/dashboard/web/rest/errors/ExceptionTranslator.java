@@ -138,10 +138,7 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
       problem.setProperty(PATH_KEY, getPathValue(request));
     }
 
-    if (
-        (err instanceof MethodArgumentNotValidException fieldException) &&
-        (problemProperties == null || !problemProperties.containsKey(FIELD_ERRORS_KEY))
-    ) {
+    if ((err instanceof MethodArgumentNotValidException fieldException) && (problemProperties == null || !problemProperties.containsKey(FIELD_ERRORS_KEY))) {
       problem.setProperty(FIELD_ERRORS_KEY, getFieldErrors(fieldException));
     }
 

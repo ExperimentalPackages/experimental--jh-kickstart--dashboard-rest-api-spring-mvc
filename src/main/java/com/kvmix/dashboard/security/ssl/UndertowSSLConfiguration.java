@@ -12,11 +12,11 @@ import org.springframework.context.annotation.Configuration;
 /**
  * SSL configuration for Undertow.
  *
- * SSL_USER_CIPHER_SUITES_ORDER : It will force the cipher suite defined by the user,
+ * <p>SSL_USER_CIPHER_SUITES_ORDER : It will force the cipher suite defined by the user,
  * allowing to achieve perfect forward secrecy.
  * This can only be activated with HTTPS and a cipher suite defined by the user (server.ssl.ciphers).
  *
- * Please note that when using KVMix, you can use the `server.ssl.ciphers` property that is available
+ * <p>Please note that when using KVMix, you can use the `server.ssl.ciphers` property that is available
  * in your `application-tls.yml` file, and which is ready to work with this configuration.
  *
  * @see <a href="https://github.com/ssllabs/research/wiki/SSL-and-TLS-Deployment-Best-Practices#25-use-forward-secrecy" target="_blank">More explanation on perfect forward secrecy</a>

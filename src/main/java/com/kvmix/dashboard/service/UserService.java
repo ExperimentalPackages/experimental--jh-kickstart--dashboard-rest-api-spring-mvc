@@ -223,16 +223,6 @@ public class UserService {
         .map(AdminUserDTO::new);
   }
 
-  public void deleteUser(String login) {
-    userRepository
-        .findOneByLogin(login)
-        .ifPresent(user -> {
-          userRepository.delete(user);
-          this.clearUserCaches(user);
-          log.debug("Deleted User: {}", user);
-        });
-  }
-
   /**
    * Update basic information (first name, last name, email, language) for the current user.
    *
@@ -256,6 +246,16 @@ public class UserService {
           userRepository.save(user);
           this.clearUserCaches(user);
           log.debug("Changed Information for User: {}", user);
+        });
+  }
+
+  public void deleteUser(String login) {
+    userRepository
+        .findOneByLogin(login)
+        .ifPresent(user -> {
+          userRepository.delete(user);
+          this.clearUserCaches(user);
+          log.debug("Deleted User: {}", user);
         });
   }
 
@@ -298,7 +298,7 @@ public class UserService {
   /**
    * Not activated users should be automatically deleted after 3 days.
    *
-   * This is scheduled to get fired everyday, at 01:00 (am).
+   * <p>This is scheduled to get fired everyday, at 01:00 (am).
    */
   @Scheduled(cron = "0 0 1 * * ?")
   public void removeNotActivatedUsers() {
