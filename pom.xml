@@ -33,7 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.3.5</spring-boot.version>
-        <hibernate.version>6.6.1.Final</hibernate.version>
+        <hibernate.version>6.6.2.Final</hibernate.version>
         <jackson.version>2.18.1</jackson.version>
         <mapstruct.version>1.6.2</mapstruct.version>
         <javax-cache-api.version>1.1.1</javax-cache-api.version>
